@@ -1,0 +1,222 @@
+// Import CSS Normalize - This replaces Eric Meyer's Reset 7-6-2012
+@import "normalize.css";
+
+// style the chromeframe message if it gets used
+// chrome frame was depricated by Google but still exists in some places including this template
+.chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
+
+
+/* =========================================================================================================================
+*	@FONT-FACE EMBEDDING
+*
+*	be sure to put relevant font files inside the /fonts folder and change links approprately 
+*   below is an example using Open Sans from Google Fonts
+*	========================================================================================================================= */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
+
+.font-base { font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; -webkit-font-smoothing: antialiased; }
+.font-open-sans { font-family: "Open Sans", Helvetica, Arial, sans-serif; }
+.font-OS-light { .font-base(); .font-open-sans(); font-weight: 300; }
+.font-OS-regular { .font-base(); .font-open-sans(); font-weight: 400; }
+.font-OS-medium { .font-base(); .font-open-sans(); font-weight: 600; }
+.font-OS-bold { .font-base(); .font-open-sans(); font-weight: 700; }
+.font-OS-heavy { .font-base(); .font-open-sans(); font-weight: 800; }
+
+
+/* =========================================================================================================================
+*	We're done with all the resets & utility classes:
+*	ADD GLOBAL SITE STYELS HERE - See your changes right away in elements.html
+*
+*	be general with these. We want to allow as much recycling as possible
+*	========================================================================================================================= */
+
+
+/* -----  Basic Colors & default sizing use LESS ----- */
+
+@action-color: #FF5E99;
+@actionHover-color: #FF5E99;
+@text-color: #333333;
+@error-color:#cc0000;
+
+@normal-size: 10px;
+
+/* -----  Basic styling  ----- */
+html { height:100%; font-size: 62.5%; }
+body {color: @text-color; height: 100%; .font-OS-regular(); font-size:2rem; background: linear-gradient(135deg, #044f48, #2a7561); background-size: cover; background-attachment: fixed; background-repeat:no-repeat; } /* base font family, size, color, etc */
+
+a, a:active, a:visited { color: @action-color; }
+
+a:hover { text-decoration: none;  }
+a.externalLink {} /* links that go off site */
+
+/* text elements */
+h1, h2, h3, h4, h5, h6, p { margin:0; padding:0; }
+
+h1 { }
+h2 { }
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+p {}
+p:first-child {} /* First paragraph in a container */
+p:first-letter {} /* use this if you want a drop cap. Note it applies to ALL paragraph tags */
+blockquote {}
+
+// strong, b { font-weight: bold; }
+// em, i { font-style: italic; }
+sub {}
+sup {}
+hr {}
+
+li { margin-left: 15px; }
+ul li {}
+ol li {}
+dl dt {}
+dl dd {}
+
+/* form elements */
+
+fieldset {}
+legend {}
+label {}
+.inputText {} /* Use since input[type=text] etc is buggy in most browsers */
+input {}
+input[type="text"], input[type="email"], input[type="password"], input[type="search"] {}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="search"]:focus {}
+input[type="submit"] {}
+textarea {}
+select {}
+select option {}
+select optgroup {}
+select optgroup option {}
+button {}
+
+
+.field-validation-valid {  }
+.field-validation-error {  }
+.input-validation-error {  }
+
+
+::-webkit-input-placeholder { color:#999; font:99% sans-serif; }
+input:-moz-placeholder { color:#999; font:99% sans-serif; }
+
+// Set these if you want to use HTML5's form validation
+input:required:invalid, input:focus:invalid { -moz-box-shadow: none; /* Removes default delete if using own shadow */ }
+input:required:valid, input:focus:valid { }
+
+input:focus:invalid { }
+input:required:valid, input:focus:valid {  }
+
+
+/* html5 layout elements */
+header {}
+footer {}
+nav {}
+aside {}
+
+.center {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+.bg { position: fixed; top: 0; left: 0; width:100%; height:100%; overflow: hidden; }
+.bg:before { content:""; position: absolute; top: 0; left: 0; right:0; bottom:0; z-index: 1; background: url('../images/photo-1451186859696-371d9477be93.jpg') no-repeat 0 0; filter: blur(80px); transform: scale(1.2); }
+
+/* =========================================================================================================================
+*	DEVICE LAYOUT. THIS IS COMMON
+*	========================================================================================================================= */
+
+.device { z-index:10; position: relative; margin: 2rem auto; background-color: transparent; background-position: top left; background-repeat: no-repeat; background-size: contain; 
+  #screenWrap { position: absolute; overflow: hidden; }
+  #screen { position: relative; z-index:1; overflow-y: auto; overflow-x: hidden; }
+  #statusBar { position: absolute; z-index: 10; top:0; right:0; left:0; }
+  #keyboard { position: absolute; z-index: 10; bottom:0; left:0; right:0; pointer-events: none; transition: all 0.2s ease-out; }
+}
+
+.device.ios { width:431px; height:866px; box-shadow: 0 0 30px 0 rgba(0,0,0,0.3); border-radius: 60px;
+  @ios-top: 100px;
+  @ios-right: 28px;
+  @ios-bottom: 100px;
+  @ios-left: 28px;
+  #screenWrap {top:@ios-top; right:@ios-right; bottom:@ios-bottom; left:@ios-left; }
+  #screen { width:100%; height:100%; padding-top:30px; }
+  #statusBar { height:30px; }
+  #statusBar.dark { background: rgba(0,0,0,0.2) url(../images/ios-status-bar.png) no-repeat 0 0; background-size: contain;  }
+  #statusBar.white { background: rgba(0,0,0,0.2) url(../images/ios-status-bar-white.png) no-repeat 0 0; background-size: contain; }
+  #keyboard { height:216px; transform: translate(0, 230px);}
+  #keyboard.lower { background: transparent url(../images/ios-lower.png) no-repeat 0 0; background-size: contain; }
+  #keyboard.open { transform: translate(0, 0); pointer-events: auto; }
+}
+
+.device.ios.white { background-image: url(../images/iphone-silver.png); }
+.device.ios.black { background-image: url(../images/iphone-black.png); }
+ 
+/* =========================================================================================================================
+* STYLES FOR EACH PROTOTYPE USE THE ID ON .device TO SPECIFY
+* ========================================================================================================================= */
+
+
+
+
+
+
+
+/* =========================================================================================================================
+*	MEDIA QUERIES FOR PRINT AND MOBILE DEVICES
+*
+*	inlined to avoid required HTTP connection
+*	========================================================================================================================= */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen  and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen  and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone Retna ----------- */
+@mediaonly screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+
+
+
+/* =========================================================================================================================
+*   UTILITY CLASSES TO MAKE YOUR LIFE EASIER - CHECK HERE BEFORE ADDING STUFF
+*   Always call these last
+*   ========================================================================================================================= */
+@import "utility.css";
+
